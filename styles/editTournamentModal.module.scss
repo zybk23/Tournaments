@@ -1,0 +1,132 @@
+@import "./global.module";
+
+.modalOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: center;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  @include mobile-small {
+    height: 1200px;
+  }
+
+  .updateTournamentContaner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+
+    .updateFormContainer {
+      max-width: 700px;
+      width: 100%;
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 5px;
+
+      @include mobile-small {
+        max-width: 100%;
+      }
+
+      .updateFormTitle {
+        font-size: 25px;
+        font-weight: 500;
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 3px;
+          width: 80px;
+          background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+      }
+
+      form {
+        .updateFormUserDetails {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          margin: 20px 0 12px 0;
+
+          @include mobile-small {
+            max-height: 300px;
+            overflow-y: scroll;
+          }
+
+          .updateFormInputBox {
+            margin-bottom: 15px;
+            width: calc(100% / 2 - 20px);
+            display: flex;
+            flex-direction: column;
+
+            @include mobile-small {
+              width: 100%;
+            }
+
+            .updateFormDetails {
+              font-weight: 500;
+              margin-bottom: 5px;
+            }
+
+            input {
+              height: 45px;
+              width: 100%;
+              outline: none;
+              border-radius: 5px;
+              border: 1px solid #ccc;
+              padding-left: 15px;
+              font-size: 14px;
+              border-bottom-width: 2px;
+              transition: all 0.3s ease;
+
+              &:focus,
+              &:valid {
+                border-color: #9b59b6;
+              }
+            }
+          }
+        }
+
+        .updateFormButton {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+
+          input {
+            &:nth-child(1) {
+              height: 30px;
+              width: 120px;
+              outline: none;
+              color: #fff;
+              border: none;
+              background: linear-gradient(135deg, #71b7e6, #9b59b6);
+              border-radius: 4px;
+              cursor: pointer;
+            }
+            &:nth-child(2) {
+              height: 30px;
+              width: 120px;
+              outline: none;
+              color: #fff;
+              border: none;
+              background: linear-gradient(135deg, #ab7372, #d11f1f);
+              border-radius: 4px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

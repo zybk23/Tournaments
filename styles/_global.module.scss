@@ -1,0 +1,23 @@
+$mainColor: #15023a;
+$soft-blue: #1fd2f1;
+$dark: #0e1018;
+
+$width-large: 1200px;
+$width-medium: 901px;
+$width-small: 768px;
+
+@mixin mobile-large {
+  @media (max-width: #{$width-large}) {
+    @content;
+  }
+}
+@mixin mobile-medium {
+  @media (max-width: #{$width-medium}) {
+    @content;
+  }
+}
+@mixin mobile-small {
+  @media (max-width: #{$width-small}) {
+    @content;
+  }
+}
