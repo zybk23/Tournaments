@@ -22,19 +22,54 @@ const TournamentCard = () => {
   const [showModal, setShowModal] = useState(false);
   const [showEditTournamentModal, setShowEditTournamentModal] = useState(false);
 
-  const { allTournaments } = useSelector((state) => state.tournamentSlice);
+  const { allTournaments, selectedSortedValue } = useSelector(
+    (state) => state.tournamentSlice
+  );
+
+  let filteredTournaments = [...allTournaments];
+
+  //Sort all data from most voted to less voted and if vote count is same then sort as last vote date
+
+  if (selectedSortedValue == 1) {
+    filteredTournaments = filteredTournaments.sort((a, b) => {
+      return b.waitlistParticipantsCount - a.waitlistParticipantsCount;
+    });
+    filteredTournaments = filteredTournaments.sort((a, b) => {
+      if (a.waitlistParticipantsCount == b.waitlistParticipantsCount)
+        return moment(b.lastVoteDate).unix() - moment(a.lastVoteDate).unix();
+    });
+  }
+
+  //Sort all data from less voted to more voted and if vote count is same then sort as last vote date
+
+  if (selectedSortedValue == 2) {
+    filteredTournaments = filteredTournaments.sort(
+      (a, b) => a.waitlistParticipantsCount - b.waitlistParticipantsCount
+    );
+    filteredTournaments = filteredTournaments.sort((a, b) => {
+      if (a.waitlistParticipantsCount == b.waitlistParticipantsCount)
+        return moment(b.lastVoteDate).unix() - moment(a.lastVoteDate).unix();
+    });
+  }
 
   let itemsPerPage = 6;
   const pages = [];
 
-  for (let i = 1; i <= Math.ceil(allTournaments.length / itemsPerPage); i++) {
+  for (
+    let i = 1;
+    i <= Math.ceil(filteredTournaments.length / itemsPerPage);
+    i++
+  ) {
     pages.push(i);
   }
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  const currentData = allTournaments.slice(indexOfFirstItem, indexOfLastItem);
+  const currentData = filteredTournaments.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const handleOpenEditTournamentModal = (item) => {
     setShowEditTournamentModal(true);
@@ -90,7 +125,7 @@ const TournamentCard = () => {
             <StyledCardBottomContainer>
               <StyledCardInfoContainer>
                 <StyledText fontweight="bold">
-                  {item.name.slice(0, 50)}
+                  {item.name.slice(0, 30)}
                 </StyledText>
                 <StyledText>{item.owner.username}</StyledText>
                 <StyledText>

@@ -44,19 +44,6 @@ export const tournamentSlice = createSlice({
       state.allTournaments = filteredTournament;
     },
     setSelectedSortedValue: (state, action) => {
-      let filteredData = [...state.allTournaments];
-
-      if (action.payload == 1) {
-        filteredData = filteredData.sort(
-          (a, b) => b.waitlistParticipantsCount - a.waitlistParticipantsCount
-        );
-      }
-      if (action.payload == 2) {
-        filteredData = filteredData.sort(
-          (a, b) => a.waitlistParticipantsCount - b.waitlistParticipantsCount
-        );
-      }
-      state.allTournaments = filteredData;
       state.selectedSortedValue = action.payload;
     },
     setUpdatedTournament: (state, action) => {
